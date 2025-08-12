@@ -15,7 +15,7 @@ class weather_app extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (BuildContext context) {
         return weatherprovider();
       },

@@ -32,8 +32,10 @@ class Search_Screen extends StatelessWidget {
               weatherService service = weatherService();
               weatherModel weather =
                   await service.GetWeather(CityName: CityName);
-              Provider.of<weatherprovider>(context).weatherdata = weather;
-              updateui!();
+              Provider.of<weatherprovider>(context, listen: false).weatherData =
+                  weather;
+              Provider.of<weatherprovider>(context, listen: false).cityName =
+                  CityName;
               Navigator.pop(context);
             },
           ),
@@ -42,5 +44,3 @@ class Search_Screen extends StatelessWidget {
     );
   }
 }
-
-weatherModel? weatherdata1;

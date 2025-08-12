@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/Models/weather_model.dart';
+import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/screens/Search_Screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,8 +16,10 @@ class _HomepageState extends State<HomePage> {
     setState(() {});
   }
 
+  weatherModel? weatherdata;
   @override
   Widget build(BuildContext context) {
+    weatherdata = Provider.of<weatherprovider>(context).weatherData;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -34,7 +38,7 @@ class _HomepageState extends State<HomePage> {
               icon: Icon(Icons.search))
         ],
       ),
-      body: weatherdata1 == null
+      body: weatherdata == null
           ? Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -57,7 +61,7 @@ class _HomepageState extends State<HomePage> {
                     flex: 3,
                   ),
                   Text(
-                    'Cairo',
+                    Provider.of<weatherprovider>(context).cityName!,
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   Text(
@@ -70,16 +74,19 @@ class _HomepageState extends State<HomePage> {
                     children: [
                       Image.asset('assets/images/clear.png'),
                       Text(
-                        '30',
+                        '${weatherdata!.temp!.toInt()}',
                         style: TextStyle(fontSize: 33),
                       ),
                       Column(
-                        children: [Text('MaxTemp:23'), Text('MinTemp:22')],
+                        children: [
+                          Text('MaxTemp:${weatherdata!.max_Temp!.toInt()}'),
+                          Text('MinTemp:${weatherdata!.min_Temp!.toInt()}')
+                        ],
                       ),
                     ],
                   ),
                   Spacer(),
-                  Text('clear',
+                  Text(weatherdata!.weatherStateName!,
                       style:
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
                   const Spacer(

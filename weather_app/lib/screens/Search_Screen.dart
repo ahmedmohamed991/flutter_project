@@ -9,6 +9,7 @@ import 'package:weather_app/providers/weather_provider.dart';
 class Search_Screen extends StatelessWidget {
   Search_Screen({this.updateui});
   VoidCallback? updateui;
+  String? CityName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +23,30 @@ class Search_Screen extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
                 label: Text('Search'),
-                suffix: Icon(Icons.search),
+                suffix: GestureDetector(
+                    onTap: () async {
+                      weatherService service = weatherService();
+                      weatherModel weather =
+                          await service.GetWeather(CityName: CityName!);
+                      Provider.of<weatherprovider>(context, listen: false)
+                          .weatherData = weather;
+                      Provider.of<weatherprovider>(context, listen: false)
+                          .cityName = CityName;
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.search)),
                 hintText: 'Enter city name',
                 border: OutlineInputBorder(),
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 25, horizontal: 16)),
+            onChanged: (data) {
+              CityName = data;
+            },
             onSubmitted: (data) async {
-              String CityName = data;
+              CityName = data;
               weatherService service = weatherService();
               weatherModel weather =
-                  await service.GetWeather(CityName: CityName);
+                  await service.GetWeather(CityName: CityName!);
               Provider.of<weatherprovider>(context, listen: false).weatherData =
                   weather;
               Provider.of<weatherprovider>(context, listen: false).cityName =

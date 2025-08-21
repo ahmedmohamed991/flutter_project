@@ -53,7 +53,12 @@ class _HomepageState extends State<HomePage> {
               ),
             )
           : Container(
-              color: Colors.orange,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                weatherdata!.getThemcolor(),
+                weatherdata!.getThemcolor()[300]!,
+                weatherdata!.getThemcolor()[100]!,
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -65,7 +70,7 @@ class _HomepageState extends State<HomePage> {
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'updated: 12-1-2022',
+                    'Updated At :  ${weatherdata!.date!.hour.toString()}:${weatherdata!.date!.minute.toString()}',
                     style: TextStyle(fontSize: 24),
                   ),
                   Spacer(),

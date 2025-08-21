@@ -5,7 +5,11 @@ import 'package:weather_app/providers/weather_provider.dart';
 import 'package:weather_app/screens/Home_Screen.dart';
 
 void main() {
-  runApp(weather_app());
+  runApp(ChangeNotifierProvider(
+      create: (BuildContext context) {
+        return weatherprovider();
+      },
+      child: weather_app()));
 }
 
 // ignore: camel_case_types
@@ -15,14 +19,16 @@ class weather_app extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        return weatherprovider();
-      },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: HomePage(),
-      ),
+    return MaterialApp(
+      theme: ThemeData(
+          primarySwatch:
+              Provider.of<weatherprovider>(context).weatherData == null
+                  ? Colors.blue
+                  : Provider.of<weatherprovider>(context)
+                      .weatherData!
+                      .getThemcolor()),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }

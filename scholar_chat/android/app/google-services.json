@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790529659508",
+    "project_id": "chat-app-e44f9",
+    "storage_bucket": "chat-app-e44f9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790529659508:android:6df95e4c5b2f187194b721",
+        "android_client_info": {
+          "package_name": "com.example.weather_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoECp4P1z7UKZnyYREVJ4rkE0OMLVnXKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

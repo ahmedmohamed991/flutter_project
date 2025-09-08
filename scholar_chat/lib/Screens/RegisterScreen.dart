@@ -97,9 +97,11 @@ class _RegisterscreenState extends State<Registerscreen> {
                           snackbar(context,
                               'The account already exists for that email.');
                         }
-                        isLoading = false;
-                        setState(() {});
+                      } catch (e) {
+                        snackbar(context, 'there  was an error');
                       }
+                      isLoading = false;
+                      setState(() {});
                     }
                   },
                   apparent_text: 'Register',
@@ -134,18 +136,20 @@ class _RegisterscreenState extends State<Registerscreen> {
     ;
   }
 
-  void snackbar(BuildContext context, String massage) {
+  void snackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: SnackBar(
-          content: Text(massage),
-        ),
+        content: Text(message),
       ),
     );
   }
 
   Future<void> registerUser() async {
     var auth = FirebaseAuth.instance;
+    if (email == null || Password == null) {
+      print('Email or Password is null');
+      return;
+    }
     UserCredential user = await auth.createUserWithEmailAndPassword(
         email: email!, password: Password!);
   }

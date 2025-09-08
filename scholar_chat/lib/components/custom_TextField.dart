@@ -8,14 +8,19 @@ class CustomTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: TextFormField(
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter a password';
-          } else if (value.length < 6) {
-            return 'Password must be at least 6 characters long';
+        validator: (Data) {
+          if (Data!.isEmpty) {
+            return 'Field Is Required';
           }
-          return null;
         },
+        // validator: (value) {
+        //   if (value == null || value.isEmpty) {
+        //     return 'Please enter a password';
+        //   } else if (value.length < 6) {
+        //     return 'Password must be at least 6 characters long';
+        //   }
+        //   return null;
+        // },
         onChanged: onChanged,
         decoration: InputDecoration(
             hintStyle: TextStyle(color: Colors.white),

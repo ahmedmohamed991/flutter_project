@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class Loginscreen extends StatelessWidget {
   static String id = 'Loginscreen';
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double hight = MediaQuery.of(context).size.height;
